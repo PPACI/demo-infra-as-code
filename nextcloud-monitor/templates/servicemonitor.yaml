@@ -1,0 +1,17 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{include "next-cloud-monitor.fullname" .}}
+  labels:
+  {{- include "next-cloud-monitor.labels" . | nindent 4}}
+spec:
+  jobLabel: next-cloud
+  selector:
+    matchLabels:
+  {{- toYaml .Values.matchLabels | nindent 6}}
+  namespaceSelector:
+    matchNames:
+  {{- toYaml .Values.namespaceSelector | nindent 6}}
+  endpoints:
+    - port: metrics
+      interval: 30s
