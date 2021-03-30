@@ -4,18 +4,6 @@ resource "kubernetes_namespace" "monitoring" {
   }
 }
 
-resource "helm_release" "kube-state-metrics" {
-  repository = "https://kubernetes.github.io/kube-state-metrics"
-  chart = "kube-state-metrics"
-  name  = "kube-state-metrics"
-
-  namespace = "kube-system"
-
-  version = "2.13.0"
-
-  wait = true
-}
-
 # https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack
 resource "helm_release" "kube-prometheus-stack" {
   depends_on = [helm_release.kube-state-metrics]
