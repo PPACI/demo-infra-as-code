@@ -9,8 +9,8 @@ resource "kubernetes_namespace" "postgresql" {
 resource "helm_release" "postgresql-ha" {
   depends_on = [helm_release.kube-prometheus-stack]
   repository = "https://charts.bitnami.com/bitnami"
-  chart = "postgresql-ha"
-  name  = "postgresql"
+  chart      = "postgresql-ha"
+  name       = "postgresql"
 
   version = "6.8.0"
 

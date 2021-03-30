@@ -8,8 +8,8 @@ resource "kubernetes_namespace" "monitoring" {
 resource "helm_release" "kube-prometheus-stack" {
   depends_on = [helm_release.kube-state-metrics]
   repository = "https://prometheus-community.github.io/helm-charts"
-  chart = "kube-prometheus-stack"
-  name  = "monitoring"
+  chart      = "kube-prometheus-stack"
+  name       = "monitoring"
 
   version = "14.4.0"
 
@@ -18,7 +18,7 @@ resource "helm_release" "kube-prometheus-stack" {
   wait = true
 
   values = [
-  <<EOF
+    <<EOF
 prometheus:
   prometheusSpec:
     storageSpec:
@@ -62,5 +62,5 @@ grafana:
       memory: 100Mi
       cpu: 200m
 EOF
-]
+  ]
 }

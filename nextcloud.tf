@@ -10,18 +10,18 @@ resource "kubernetes_namespace" "nextcloud" {
 resource "helm_release" "nextcloud" {
   depends_on = [helm_release.postgresql-ha]
   repository = "https://nextcloud.github.io/helm/"
-  chart = "nextcloud"
-  name  = "nextcloud"
+  chart      = "nextcloud"
+  name       = "nextcloud"
 
   namespace = kubernetes_namespace.nextcloud.metadata.0.name
 
   version = "2.5.16"
 
-  wait = true
+  wait    = true
   timeout = 2 * 60
 
   values = [
-  <<EOF
+    <<EOF
 nextcloud:
   host: nextcloud.nextcloud.svc.cluster.local:8080
   username: admin
@@ -57,13 +57,13 @@ EOF
 
 resource "helm_release" "nextcloud-monitoring" {
   depends_on = [helm_release.nextcloud]
-  chart = "./nextcloud-monitor"
-  name  = "nextcloud-monitor"
+  chart      = "./nextcloud-monitor"
+  name       = "nextcloud-monitor"
 
   namespace = kubernetes_namespace.nextcloud.metadata.0.name
 
   values = [
-  <<EOF
+    <<EOF
 matchLabels:
   app.kubernetes.io/instance: nextcloud
   app.kubernetes.io/managed-by: Helm
