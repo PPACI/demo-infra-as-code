@@ -22,3 +22,4 @@ You don't need to specific a file, terraform will use all `*.tf` files in the cu
 * https://registry.terraform.io/providers/hashicorp/kubernetes/latest
 * https://helm.sh/docs/intro/quickstart/
 * https://helm.sh/docs/chart_template_guide/getting_started/
+* https://artifacthub.io
